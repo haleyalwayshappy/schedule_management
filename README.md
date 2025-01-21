@@ -8,7 +8,8 @@ HIT_채용미션
 - 일정 추가 버튼 상단 앱바 우측으로 배치 (예정)
 - 깔끔한 UI에 대중적인 UX를 중점으로 제작
 - 피그마로 간단한 화면 설계
-- ![일정보드이미지2.png](..%2F..%2F..%2FDesktop%2F%EC%9D%BC%EC%A0%95%EB%B3%B4%EB%93%9C%EC%9D%B4%EB%AF%B8%EC%A7%802.png)
+![일정보드이미지2](https://github.com/user-attachments/assets/0a30f8b3-532e-4494-b95b-9ca39f4d6761)
+
 - widget 분리
 
 2. Model 제작
