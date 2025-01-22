@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../model/task_status.dart';
-import '../theme/res/color_palette.dart';
+import '../theme/color_palette.dart';
+import '../widgets/add_Schedule_dialog.dart';
+import '../widgets/custom_button.dart';
 import '../widgets/task_section_widget.dart';
 
 class BoardScreen extends StatelessWidget {
-  const BoardScreen({super.key});
+  // ScheduleController controller = Get.find();
+
+  BoardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +25,19 @@ class BoardScreen extends StatelessWidget {
           ),
           centerTitle: false,
           backgroundColor: Colors.white,
+          actions: [
+            CustomButton(
+                label: "일정추가",
+                onPressed: () {
+                  AddScheduleDialog.show(context);
+                })
+          ],
         ),
         backgroundColor: Palette.whiteColor,
         body: SafeArea(
           child: Column(
             children: [
-              Container(height: 0.5, color: Colors.grey), // 구분선
+              // Container(height: 0.5, color: Colors.grey), // 구분선
               Expanded(
                 child: SingleChildScrollView(
                   child: Row(

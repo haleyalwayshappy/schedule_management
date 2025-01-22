@@ -8,11 +8,7 @@ HIT_채용미션
 - 일정 추가 버튼 상단 앱바 우측으로 배치 (예정)
 - 깔끔한 UI에 대중적인 UX를 중점으로 제작
 - 피그마로 간단한 화면 설계
-<<<<<<< Updated upstream
 ![일정보드이미지2](https://github.com/user-attachments/assets/0a30f8b3-532e-4494-b95b-9ca39f4d6761)
-=======
-  ![일정보드이미지2](https://github.com/user-attachments/assets/0a30f8b3-532e-4494-b95b-9ca39f4d6761)
->>>>>>> Stashed changes
 
 - widget 분리
 
@@ -48,5 +44,15 @@ HIT_채용미션
 - Task 디자인 변경 : 확장성을 생각해 Task별로 컬러 값을 주었는데 해당 컬러값을 사용해 backgroundColor를 변경 (opacity = 0.1 로 주어 가독성 살림) 
 
 
-6. 상세 페이지 만들기 
-7. 
+6. 상세 페이지, 추가페이지, 수정 페이지 구현
+- 노션 스타일의 화면 구현
+
+7. 파이어 베이스 연동
+- CRUD 기능 구현
+- 가짜데이터 지우고 파이어베이스로 저장된 값 가져오기
+
+8.Controller ,Service 분리
+- controller파일과 service파일을 분리하여 코드 가독성과 유지보수성을 높임
+
+9. Toastification 라이브러리 사용
+- 패키지 사용하여 삭제시 알림 팝업띄움 

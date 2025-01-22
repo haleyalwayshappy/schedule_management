@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO : 글씨 타입
+/* 글씨 타입 */
 abstract class Typo {
   const Typo({
     required this.name,

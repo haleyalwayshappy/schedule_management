@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO : 앱컬러
+/* 앱컬러 */
 abstract class Palette {
   static Color primaryColor = const Color(0xff486284);
   static Color whiteColor = const Color(0xffffffff);

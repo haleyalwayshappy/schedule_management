@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:schedule_management/widgets/detail_schedule_dialog.dart';
 import '../controller/task_controller.dart';
+import '../controller/schedule_controller.dart';
 import '../model/schedule.dart';
 import '../model/task_status.dart';
 import '../widgets/schedule_widget.dart';
 
 class TaskSectionWidget extends StatelessWidget {
   final TaskStatus status;
-  final TaskController _controller = Get.find();
 
   TaskSectionWidget({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {
+    final TaskController taskController = Get.find();
+
     return DragTarget<Schedule>(
       onWillAcceptWithDetails: (details) => details.data != null,
       onAcceptWithDetails: (details) {
         final draggedData = details.data;
         if (draggedData.status != status) {
-          _controller.moveTask(draggedData, draggedData.status, status);
+          taskController.moveTask(draggedData, draggedData.status, status);
         }
       },
       builder: (context, candidateData, rejectedData) {
@@ -30,7 +33,7 @@ class TaskSectionWidget extends StatelessWidget {
             color: status.color.withOpacity(0.1),
             border: candidateData.isNotEmpty
                 ? Border.all(color: status.color, width: 2.0)
-                : null, // 드롭 가능 여부 시각적 표시
+                : null,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,11 +51,12 @@ class TaskSectionWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              // 섹션 작업 리스트 또는 빈 상태 표시
+
+              // 작업 리스트
               Obx(() {
-                final schedules = _controller.taskMap[status]!;
-                if (schedules.isEmpty) {
-                  // 작업이 없을 때 표시
+                final tasks = taskController.taskMap[status]!;
+                // 작업이 없을 때 메시지 표시
+                if (tasks.isEmpty) {
                   return Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 50.0),
@@ -66,80 +70,82 @@ class TaskSectionWidget extends StatelessWidget {
                       ),
                     ),
                   );
-                }
-                // 작업 리스트
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: schedules.length,
-                  itemBuilder: (context, index) {
-                    final schedule = schedules[index];
-                    return DragTarget<Schedule>(
-                      onWillAcceptWithDetails: (details) {
-                        final draggedData = details.data;
-                        return draggedData != null &&
-                            draggedData.status == status;
-                      },
-                      onAcceptWithDetails: (details) {
-                        final draggedData = details.data;
-                        final draggedIndex = schedules.indexOf(draggedData);
-                        if (draggedIndex == -1) {
-                          print(
-                              "Error: Dragged item not found in the current list.");
-                          return;
-                        }
+                } else {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: tasks.length,
+                    itemBuilder: (context, index) {
+                      final schedule = tasks[index];
+                      return DragTarget<Schedule>(
+                        onWillAcceptWithDetails: (details) {
+                          final draggedData = details.data;
+                          return draggedData != null &&
+                              draggedData.status == status;
+                        },
+                        onAcceptWithDetails: (details) {
+                          final draggedData = details.data;
+                          final draggedIndex = tasks.indexOf(draggedData);
+                          if (draggedIndex == -1) {
+                            print("Error: 해당 목록에서 드래그한 항목 찾을 수 없음.");
+                            return;
+                          }
 
-                        // 대상 인덱스 계산
-                        if (draggedIndex != index) {
-                          _controller.updateTaskOrderWithinSection(
-                              status, draggedIndex, index);
-                        }
-                      },
-                      builder: (context, innerCandidateData, _) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            border: innerCandidateData.isNotEmpty
-                                ? Border.all(color: status.color, width: 2.0)
-                                : null, // 드롭 가능 여부 시각적 표시
-                          ),
-                          child: LongPressDraggable<Schedule>(
-                            data: schedule,
-                            feedback: Material(
-                              color: Colors.transparent,
-                              child: ScheduleWidget(
-                                color: status.color,
-                                title: schedule.title,
-                                content: schedule.content,
-                                assignee: schedule.assignee,
-                                date:
-                                    "${schedule.date.year}년 ${schedule.date.month}월 ${schedule.date.day}일",
+                          // 대상 인덱스 계산
+                          if (draggedIndex != index) {
+                            taskController.updateTaskOrderWithinSection(
+                                status, draggedIndex, index);
+                          }
+                        },
+                        builder: (context, innerCandidateData, _) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: innerCandidateData.isNotEmpty
+                                  ? Border.all(color: status.color, width: 2.0)
+                                  : null, // 드래그앤 드롭 직관적으로 확인
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                DetailScheduleDialog.show(schedule.id);
+                                print("tap 했다${schedule.id}");
+                              },
+                              child: LongPressDraggable<Schedule>(
+                                data: schedule,
+                                feedback: Material(
+                                  color: Colors.transparent,
+                                  child: ScheduleWidget(
+                                    color: status.color,
+                                    title: schedule.title,
+                                    content: schedule.content,
+                                    assignee: schedule.assignee,
+                                    date:
+                                        "${schedule.date.year}년 ${schedule.date.month}월 ${schedule.date.day}일",
+                                  ),
+                                ),
+                                childWhenDragging: ScheduleWidget(
+                                  color: status.color,
+                                  title: schedule.title,
+                                  content: schedule.content,
+                                  assignee: schedule.assignee,
+                                  date:
+                                      "${schedule.date.year}년 ${schedule.date.month}월 ${schedule.date.day}일",
+                                ),
+                                child: ScheduleWidget(
+                                  color: status.color,
+                                  title: schedule.title,
+                                  content: schedule.content,
+                                  assignee: schedule.assignee,
+                                  date:
+                                      "${schedule.date.year}년 ${schedule.date.month}월 ${schedule.date.day}일",
+                                ),
                               ),
                             ),
-                            childWhenDragging: Opacity(
-                              opacity: 0.5,
-                              child: ScheduleWidget(
-                                color: status.color,
-                                title: schedule.title,
-                                content: schedule.content,
-                                assignee: schedule.assignee,
-                                date:
-                                    "${schedule.date.year}년 ${schedule.date.month}월 ${schedule.date.day}일",
-                              ),
-                            ),
-                            child: ScheduleWidget(
-                              color: status.color,
-                              title: schedule.title,
-                              content: schedule.content,
-                              assignee: schedule.assignee,
-                              date:
-                                  "${schedule.date.year}년 ${schedule.date.month}월 ${schedule.date.day}일",
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                );
+                          );
+                        },
+                      );
+                    },
+                  );
+                }
               }),
             ],
           ),

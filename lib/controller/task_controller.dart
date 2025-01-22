@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
+import 'package:schedule_management/controller/schedule_controller.dart';
 import '../model/schedule.dart';
 import '../model/task_status.dart';
 
+/*  이동 및 화면 기능 관련 */
 class TaskController extends GetxController {
+  ScheduleController scheduleController = Get.find();
   final taskMap = {
     TaskStatus.todo: <Schedule>[].obs,
     TaskStatus.urgent: <Schedule>[].obs,
@@ -13,21 +16,30 @@ class TaskController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _initializeDummyData();
+    // ScheduleController.schedules를 구독 해서 상태를 구분한다.
+    ever(scheduleController.schedules, (_) {
+      categorizeTasks();
+    });
+
+    // 초기 상태 분류
+    categorizeTasks();
   }
 
-  void _initializeDummyData() {
-    final dummyData = generateDummyData();
-    // `index` 필드 추가
-    for (int i = 0; i < dummyData.length; i++) {
-      dummyData[i].index = i;
+  /*  상태 분류 */
+  void categorizeTasks() {
+    for (var status in TaskStatus.values) {
+      taskMap[status]!.assignAll(
+        scheduleController.schedules
+            .where((schedule) => schedule.status == status)
+            .toList(),
+      );
     }
-    taskMap[TaskStatus.todo]!.assignAll(dummyData);
   }
 
-  /// Schedule 이동 로직
+  /* Schedule 이동 로직 */
   void moveTask(Schedule schedule, TaskStatus from, TaskStatus to,
       {int? oldIndex, int? newIndex}) {
+    // 수직 이동
     if (from == to && oldIndex != null && newIndex != null) {
       final taskList = taskMap[from]!;
 
@@ -48,6 +60,7 @@ class TaskController extends GetxController {
       return;
     }
 
+    // 수평이동
     if (from != to) {
       // 섹션 간 이동
       taskMap[from]?.remove(schedule);
@@ -87,4 +100,13 @@ class TaskController extends GetxController {
       }
     }
   }
+
+// void _initializeDummyData() {
+//   final dummyData = generateDummyData();
+//   // `index` 필드 추가
+//   for (int i = 0; i < dummyData.length; i++) {
+//     dummyData[i].index = i;
+//   }
+//   taskMap[TaskStatus.todo]!.assignAll(dummyData);
+// }
 }

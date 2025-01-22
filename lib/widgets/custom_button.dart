@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../theme/res/color_palette.dart';
+import '../theme/color_palette.dart';
 
-// 추가버튼 (후에 버튼 재사용성 고려)
+// 커스텀버튼 (통일감 있는 버튼 스타일)
 class CustomButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;

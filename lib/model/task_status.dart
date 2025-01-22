@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// 작업 상태 enum class
+/* 작업 상태 enum class */
 enum TaskStatus {
   todo("할일", Colors.blue),
   urgent("급한일", Colors.red),

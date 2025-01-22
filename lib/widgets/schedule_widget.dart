@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../theme/res/color_palette.dart';
-import '../theme/res/typo.dart';
+import '../theme/color_palette.dart';
+import '../theme/typo.dart';
 
 /// TODO : 일정 위젯
 /// 1.제목 title
