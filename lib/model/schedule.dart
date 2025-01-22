@@ -4,18 +4,23 @@ import 'package:schedule_management/model/task_status.dart';
 
 // TODO: 스케쥴 model class
 class Schedule {
-  final String title;
-  final String assignee;
-  final String content;
-  final DateTime date;
+  final String id;
+  String title;
+  String content;
+  String assignee;
+  DateTime date;
   TaskStatus status;
+  int index; // 추가된 필드: 리스트 내 순서를 관리
 
-  Schedule(
-      {required this.title,
-      required this.assignee,
-      required this.content,
-      required this.date,
-      this.status = TaskStatus.todo});
+  Schedule({
+    required this.id,
+    required this.title,
+    required this.content,
+    required this.assignee,
+    required this.date,
+    required this.index, // 필수 매개변수로 설정
+    this.status = TaskStatus.todo,
+  });
 }
 
 List<Schedule> generateDummyData() {
@@ -49,6 +54,8 @@ List<Schedule> generateDummyData() {
 
   List<Schedule> dummyData = List.generate(20, (index) {
     return Schedule(
+      index: index,
+      id: "schedule_$index",
       title: titles[random.nextInt(titles.length)],
       content: contents[random.nextInt(contents.length)],
       assignee: assignees[random.nextInt(assignees.length)],
