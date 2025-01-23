@@ -10,6 +10,7 @@ class ScheduleController extends GetxController {
   var schedules = <Schedule>[].obs; // 파이어베이스에서 가져온 스케쥴 리스트
   Rx<DateTime> selectedDate = DateTime.now().obs; // 선택된 날짜
 
+  // 데이터 가져오기 로딩 및 오류 상태 체크
   RxBool isLoading = false.obs;
   RxString errorMessage = ''.obs;
 
