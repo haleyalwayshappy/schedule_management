@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/color_palette.dart';
 import '../theme/typo.dart';
 
-/// TODO : 일정 위젯
+///  일정 위젯
 /// 1.제목 title
 /// 2.담당자 assignee
 /// 3.내용 content
