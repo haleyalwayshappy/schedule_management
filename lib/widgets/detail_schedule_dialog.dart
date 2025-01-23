@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:toastification/toastification.dart';
 
 import '../controller/schedule_controller.dart';
+import '../model/task_status.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/color_palette.dart';
 import '../theme/typo.dart';
 import 'custom_button.dart';
+import 'status_chip_widget.dart';
 import 'update_schedule_dialog.dart';
 
 /* 상세 페이지 */
@@ -15,6 +17,7 @@ class DetailScheduleDialog {
     final ScheduleController _controller = Get.find();
     final scheduleDetail = _controller.schedules
         .firstWhere((scheduleDetail) => scheduleDetail.id == scheduleId);
+    final selectedStatus = scheduleDetail.status;
 
     if (scheduleDetail == null) {
       Get.snackbar("오류", "일정을 찾을 수 없습니다.");
@@ -46,6 +49,26 @@ class DetailScheduleDialog {
                       fontWeight: Pretendard().bold,
                       color: Palette.primaryColor,
                     ),
+                  ),
+                  SizedBox(height: 10),
+                  ChoiceChip(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(
+                        color: selectedStatus.color,
+                        width: 1.0,
+                      ),
+                    ),
+                    label: Text(
+                      selectedStatus.label,
+                      style: TextStyle(
+                        color: Palette.whiteColor,
+                      ),
+                    ),
+                    backgroundColor: Palette.whiteColor,
+                    selectedColor: selectedStatus.color.withOpacity(0.8),
+                    // selected: isSelected,
+                    onSelected: (selected) {}, selected: true,
                   ),
                   SizedBox(height: 10),
                   Row(
@@ -119,20 +142,17 @@ class DetailScheduleDialog {
                     Get.back();
                   },
                 ),
-                ToastificationWrapper(
-                  child: CustomButton(
-                    label: "삭제",
-                    onPressed: () async {
-                      Get.back();
-                      await _controller.deleteSchedule(scheduleDetail.id);
-                      toastification.show(
-                        context: context,
-                        icon: const Icon(Icons.notification_important),
-                        title: Text("일정이 삭제 되었습니다."),
-                        autoCloseDuration: const Duration(seconds: 3),
-                      );
-                    },
-                  ),
+                CustomButton(
+                  label: "삭제",
+                  onPressed: () async {
+                    Get.back();
+                    await _controller.deleteSchedule(scheduleDetail.id);
+                    toastification.show(
+                      icon: const Icon(Icons.notification_important),
+                      title: Text("일정이 삭제 되었습니다."),
+                      autoCloseDuration: const Duration(seconds: 3),
+                    );
+                  },
                 ),
                 CustomButton(
                   label: "수정",

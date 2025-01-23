@@ -4,10 +4,12 @@ import 'package:schedule_management/model/schedule.dart';
 import 'package:toastification/toastification.dart';
 
 import '../controller/schedule_controller.dart';
+import '../model/task_status.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/color_palette.dart';
 import '../theme/typo.dart';
 import 'custom_button.dart';
+import 'status_chip_widget.dart';
 
 class UpdateScheduleDialog {
   static void show(Schedule scheduleDetail) {
@@ -15,6 +17,7 @@ class UpdateScheduleDialog {
     final TextEditingController assigneeController = TextEditingController();
     final TextEditingController titleController = TextEditingController();
     final TextEditingController contentController = TextEditingController();
+    final Rx<TaskStatus> selectedStatus = Rx<TaskStatus>(scheduleDetail.status);
 
     Rx<DateTime> selectedDate = Rx<DateTime>(scheduleDetail.date);
 
@@ -131,6 +134,10 @@ class UpdateScheduleDialog {
                     ],
                   ),
                   const SizedBox(height: 10),
+                  StatusChipWidget(
+                    selectedStatus: selectedStatus,
+                  ),
+                  const SizedBox(height: 10),
                   Text("제목", style: AppTextStyles.noticeTextStyle),
                   TextField(
                     controller: titleController,
@@ -196,47 +203,44 @@ class UpdateScheduleDialog {
                     Get.back(); // 다이얼로그 닫기
                   },
                 ),
-                ToastificationWrapper(
-                  child: CustomButton(
-                    label: "수정",
-                    onPressed: () async {
-                      // 수정 버튼 클릭 시 데이터 수정
-                      Schedule editSchedule = Schedule(
-                        id: scheduleDetail.id,
-                        index: scheduleDetail.index,
-                        title: titleController.text.isNotEmpty
-                            ? titleController.text
-                            : scheduleDetail.title,
-                        content: contentController.text.isNotEmpty
-                            ? contentController.text
-                            : scheduleDetail.content,
-                        assignee: assigneeController.text.isNotEmpty
-                            ? assigneeController.text
-                            : scheduleDetail.assignee,
-                        date: _controller.selectedDate.value,
-                        status: scheduleDetail.status,
-                      );
+                CustomButton(
+                  label: "수정",
+                  onPressed: () async {
+                    // 수정 버튼 클릭 시 데이터 수정
+                    Schedule editSchedule = Schedule(
+                      id: scheduleDetail.id,
+                      index: scheduleDetail.index,
+                      title: titleController.text.isNotEmpty
+                          ? titleController.text
+                          : scheduleDetail.title,
+                      content: contentController.text.isNotEmpty
+                          ? contentController.text
+                          : scheduleDetail.content,
+                      assignee: assigneeController.text.isNotEmpty
+                          ? assigneeController.text
+                          : scheduleDetail.assignee,
+                      date: _controller.selectedDate.value,
+                      status: selectedStatus.value,
+                    );
 
-                      final success =
-                          await _controller.updateSchedule(editSchedule);
-                      if (success) {
-                        Get.back();
-                        toastification.show(
-                          context: context,
-                          icon: const Icon(Icons.check),
-                          title: Text("일정이 수정되었습니다."),
-                          autoCloseDuration: const Duration(seconds: 3),
-                        );
-                      } else {
-                        toastification.show(
-                          context: context,
-                          icon: const Icon(Icons.dangerous_outlined),
-                          title: Text("일정 수정 중 오류가 생겼습니다."),
-                          autoCloseDuration: const Duration(seconds: 3),
-                        );
-                      }
-                    },
-                  ),
+                    final success =
+                        await _controller.updateSchedule(editSchedule);
+                    if (success) {
+                      Get.back();
+                      toastification.show(
+                        icon: const Icon(Icons.check),
+                        title: Text("일정이 수정되었습니다."),
+                        autoCloseDuration: const Duration(seconds: 3),
+                      );
+                    } else {
+                      toastification.show(
+                        context: context,
+                        icon: const Icon(Icons.dangerous_outlined),
+                        title: Text("일정 수정 중 오류가 생겼습니다."),
+                        autoCloseDuration: const Duration(seconds: 3),
+                      );
+                    }
+                  },
                 ),
               ],
             ),

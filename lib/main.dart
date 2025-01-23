@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:schedule_management/service/firebase_service.dart';
 import 'package:schedule_management/view/board_screen.dart';
+import 'package:toastification/toastification.dart';
 
 import 'controller/schedule_controller.dart';
 import 'controller/task_controller.dart';
@@ -13,7 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(ToastificationWrapper(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

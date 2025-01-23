@@ -16,15 +16,16 @@ class BoardScreen extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "일정관리",
             style: TextStyle(
-              color: Colors.black,
+              color: Palette.blackColor,
               fontWeight: FontWeight.bold,
             ),
           ),
           centerTitle: false,
-          backgroundColor: Colors.white,
+          backgroundColor: Palette.whiteColor,
+          toolbarHeight: 60.0, // AppBar 높이
           actions: [
             CustomButton(
                 label: "일정추가",

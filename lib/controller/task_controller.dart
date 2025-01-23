@@ -37,51 +37,48 @@ class TaskController extends GetxController {
   }
 
   /* Schedule 이동 로직 */
-  void moveTask(Schedule schedule, TaskStatus from, TaskStatus to,
-      {int? oldIndex, int? newIndex}) {
-    // 수직 이동
-    if (from == to && oldIndex != null && newIndex != null) {
-      final taskList = taskMap[from]!;
+  Future<void> moveTask(Schedule schedule, TaskStatus from, TaskStatus to,
+      {int? oldIndex, int? newIndex}) async {
+    final fromList = taskMap[from]!;
+    final toList = taskMap[to]!;
 
-      // `index` 값 업데이트
-      taskList[oldIndex].index = newIndex;
+    // 기존 리스트에서 제거
+    fromList.remove(schedule);
 
-      // 리스트 정렬
-      taskList.sort((a, b) => a.index.compareTo(b.index));
-
-      // 디버깅 출력
-      print("=== Same Section Move ===");
-      print("From Index: $oldIndex, To Index: $newIndex");
-      print("Updated Task List in Section ${from.label}:");
-      for (var task in taskList) {
-        print(" - ${task.title} (Index: ${task.index})");
-      }
-
-      return;
-    }
-
-    // 수평이동
+    // 상태 업데이트 (수평 이동일 경우)
     if (from != to) {
-      // 섹션 간 이동
-      taskMap[from]?.remove(schedule);
       schedule.status = to;
-
-      final taskList = taskMap[to]!;
-      schedule.index = taskList.length; // 새로 추가된 항목은 가장 마지막에 위치
-      taskList.add(schedule);
-
-      // 리스트 정렬
-      taskList.sort((a, b) => a.index.compareTo(b.index));
-
-      // 디버깅 출력
-      print("=== Cross Section Move ===");
-      print(
-          "Moved Task: ${schedule.title} (From: ${from.label} -> To: ${to.label})");
-      print("Updated Task List in Section ${to.label}:");
-      for (var task in taskList) {
-        print(" - ${task.title} (Index: ${task.index})");
-      }
     }
+
+    // 새로운 리스트에 삽입
+    if (newIndex != null && newIndex >= 0 && newIndex < toList.length) {
+      // 지정된 위치에 삽입
+      toList.insert(newIndex, schedule);
+    } else {
+      // 최하단에 위치 (추가)
+      schedule.index = toList.length;
+      toList.add(schedule);
+    }
+
+    // 리스트 정렬
+    toList.sort((a, b) => a.index.compareTo(b.index));
+
+    // 위치 저장 Firebase 업데이트
+    try {
+      await scheduleController.updateTaskStatus(
+        schedule.id,
+        schedule.index,
+        schedule.status,
+      );
+      print("Firebase: Status and Index updated for ${schedule.title}");
+    } catch (e) {
+      print("Error updating status/index in Firebase: $e");
+    }
+
+    // 디버깅
+    print("=== Task Move Completed ===");
+    print(
+        "Task '${schedule.title}' moved from ${from.label} to ${to.label}, Index: ${schedule.index}");
   }
 
   void updateTaskOrderWithinSection(

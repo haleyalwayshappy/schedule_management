@@ -29,7 +29,7 @@ class ScheduleWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 8, left: 6, right: 6),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Palette.whiteColor,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -76,7 +76,7 @@ class ScheduleWidget extends StatelessWidget {
                   assignee,
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.black54,
+                    color: Palette.blackColor,
                     fontFamily: 'Pretendard',
                     fontWeight: Pretendard().light,
                   ),
@@ -85,7 +85,7 @@ class ScheduleWidget extends StatelessWidget {
                   date,
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.black54,
+                    color: Palette.blackColor,
                     fontFamily: 'Pretendard',
                     fontWeight: Pretendard().light,
                   ),

@@ -1,3 +1,5 @@
+import 'package:schedule_management/model/task_status.dart';
+
 import '../model/schedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -52,12 +54,13 @@ class FirebaseService {
     }
   }
 
-  /* status 단일 수정 ( 위치이동 시 필요 ) */
-  Future<bool> updateTaskStatus(String id) async {
+/* TODO index, status 단일 수정 ( 위치이동 시 필요 ) */
+  Future<void> updateTaskStatus(String id, int index, TaskStatus status) async {
     try {
-      return true;
-
-      return true;
+      await _firestore.collection('schedules').doc(id).update({
+        'status': status.name,
+        'index': index,
+      });
     } catch (e) {
       throw Exception("Failed to update taskStatus: $e");
     }

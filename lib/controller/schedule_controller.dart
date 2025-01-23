@@ -73,12 +73,10 @@ class ScheduleController extends GetxController {
     }
   }
 
-/* TODO status 단일 수정 ( 위치이동 시 필요 ) */
-  Future<bool> updateTaskStatus(String id) async {
+  /* TODO index, status 단일 수정 ( 위치이동 시 필요 ) */
+  Future<void> updateTaskStatus(String id, int index, TaskStatus status) async {
     try {
-      await fsService.updateTaskStatus(id);
-
-      return true;
+      await fsService.updateTaskStatus(id, index, status);
     } catch (e) {
       throw Exception("Failed to update taskStatus: $e");
     }

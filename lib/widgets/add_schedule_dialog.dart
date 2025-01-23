@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:schedule_management/model/task_status.dart';
 import 'package:schedule_management/theme/typo.dart';
 import 'package:schedule_management/widgets/custom_button.dart';
+import 'package:schedule_management/widgets/status_chip_widget.dart';
+import 'package:toastification/toastification.dart';
 
 import '../controller/schedule_controller.dart';
 import '../theme/app_text_styles.dart';
@@ -15,6 +17,8 @@ class AddScheduleDialog {
     final TextEditingController assigneeController = TextEditingController();
     final TextEditingController titleController = TextEditingController();
     final TextEditingController contentController = TextEditingController();
+    final Rx<TaskStatus> selectedStatus = TaskStatus.todo.obs;
+
     DateTime initialDay = DateTime.now();
 
     showDialog(
@@ -123,6 +127,10 @@ class AddScheduleDialog {
                     ],
                   ),
                   const SizedBox(height: 10),
+                  StatusChipWidget(
+                    selectedStatus: selectedStatus,
+                  ),
+                  const SizedBox(height: 10),
                   Text("제목", style: AppTextStyles.noticeTextStyle),
                   TextField(
                     controller: titleController,
@@ -196,10 +204,16 @@ class AddScheduleDialog {
                       contentController.text,
                       assigneeController.text,
                       controller.selectedDate.value,
-                      TaskStatus.todo,
+                      selectedStatus.value,
                     );
 
                     Get.back();
+                    toastification.show(
+                      context: context,
+                      icon: const Icon(Icons.notification_add_rounded),
+                      title: Text("일정이 추가 되었습니다."),
+                      autoCloseDuration: const Duration(seconds: 3),
+                    );
                   },
                 ),
               ],
