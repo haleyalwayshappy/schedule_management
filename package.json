@@ -1,7 +1,7 @@
 {
   "name": "schedule_management",
   "version": "1.0.0",
-  "description": "HIT_채용미션",
+  "description": "스케쥴 관리 웹",
   "main": "index.js",
   "directories": {
     "lib": "lib",
@@ -20,8 +20,5 @@
   "bugs": {
     "url": "https://github.com/haleyalwayshappy/schedule_management/issues"
   },
-  "homepage": "https://github.com/haleyalwayshappy/schedule_management#readme",
-  "dependencies": {
-    "express": "^4.21.2"
-  }
+  "homepage": "https://github.com/haleyalwayshappy/schedule_management#readme"
 }
