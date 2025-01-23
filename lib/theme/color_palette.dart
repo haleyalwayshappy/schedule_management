@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /* 앱컬러 */
-abstract class Palette {
+class Palette {
   static Color primaryColor = const Color(0xff486284);
   static Color whiteColor = const Color(0xffffffff);
   static Color blackColor = const Color(0xff000000);

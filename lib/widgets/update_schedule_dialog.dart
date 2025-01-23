@@ -223,16 +223,15 @@ class UpdateScheduleDialog {
                       status: selectedStatus.value,
                     );
 
-                    final success =
-                        await _controller.updateSchedule(editSchedule);
-                    if (success) {
+                    try {
+                      await _controller.updateSchedule(editSchedule);
                       Get.back();
                       toastification.show(
                         icon: const Icon(Icons.check),
                         title: Text("일정이 수정되었습니다."),
                         autoCloseDuration: const Duration(seconds: 3),
                       );
-                    } else {
+                    } catch (e) {
                       toastification.show(
                         context: context,
                         icon: const Icon(Icons.dangerous_outlined),

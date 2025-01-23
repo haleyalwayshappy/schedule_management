@@ -21,7 +21,8 @@ class TaskSectionWidget extends StatelessWidget {
       onAcceptWithDetails: (details) {
         final draggedData = details.data;
         if (draggedData.status != status) {
-          taskController.moveTask(draggedData, draggedData.status, status);
+          taskController.moveTask(
+              schedule: draggedData, from: draggedData.status, to: status);
         }
       },
       builder: (context, candidateData, rejectedData) {
@@ -94,7 +95,9 @@ class TaskSectionWidget extends StatelessWidget {
                           // 대상 인덱스 계산
                           if (draggedIndex != index) {
                             taskController.updateTaskOrderWithinSection(
-                                status, draggedIndex, index);
+                                status: status,
+                                oldIndex: draggedIndex,
+                                newIndex: index);
                           }
                         },
                         builder: (context, innerCandidateData, _) {

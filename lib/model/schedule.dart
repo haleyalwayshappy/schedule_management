@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:schedule_management/model/task_status.dart';
 
 /* 스케쥴 model class */
@@ -30,7 +31,7 @@ class Schedule {
       'assignee': assignee,
       'title': title,
       'content': content,
-      'date': date.toIso8601String(),
+      'date': date,
       'status': status.name,
       'index': index,
     };
@@ -42,11 +43,9 @@ class Schedule {
       title: json['title'] as String,
       content: json['content'] as String,
       assignee: json['assignee'] as String,
-      date: DateTime.parse(json['date']),
+      date: (json['date'] as Timestamp).toDate(),
       index: json['index'] as int,
-      status: TaskStatus.values.firstWhere(
-          (e) => e.name == (json['status'] as String),
-          orElse: () => TaskStatus.todo),
+      status: TaskStatus.fromName(json['status'] as String),
     );
   }
 

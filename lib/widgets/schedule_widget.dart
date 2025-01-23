@@ -27,6 +27,7 @@ class ScheduleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 300,
       margin: EdgeInsets.only(bottom: 8, left: 6, right: 6),
       decoration: BoxDecoration(
           color: Palette.whiteColor,
@@ -48,10 +49,12 @@ class ScheduleWidget extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                  color: Palette.blackColor,
-                  fontSize: 16,
-                  fontFamily: 'Pretendard',
-                  fontWeight: Pretendard().semiBold),
+                color: Palette.blackColor,
+                fontSize: 16,
+                fontFamily: 'Pretendard',
+                fontWeight: Pretendard().semiBold,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             const SizedBox(height: 12),
 
@@ -79,6 +82,7 @@ class ScheduleWidget extends StatelessWidget {
                     color: Palette.blackColor,
                     fontFamily: 'Pretendard',
                     fontWeight: Pretendard().light,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Text(
@@ -88,6 +92,7 @@ class ScheduleWidget extends StatelessWidget {
                     color: Palette.blackColor,
                     fontFamily: 'Pretendard',
                     fontWeight: Pretendard().light,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],

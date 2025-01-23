@@ -31,12 +31,34 @@ class FirebaseService {
   }
 
   /* 스케쥴 추가 */
-  Future<void> addSchedule(String newId, Schedule schedule) async {
+  Future<void> addSchedule({
+    required String title,
+    required String content,
+    required String assignee,
+    required DateTime date,
+    required TaskStatus task,
+    required int existingSchedulesCount,
+  }) async {
     try {
+      // ID 및 인덱스 생성
+      int newIndex = existingSchedulesCount + 1;
+      String newId = 'schedule_${date.day}_${newIndex.toString()}';
+      // Schedule 객체 생성
+      Schedule newSchedule = Schedule(
+        index: newIndex,
+        id: newId,
+        title: title,
+        content: content,
+        assignee: assignee,
+        date: date,
+        status: task,
+      );
+
+      // Firebase에 저장
       await _firestore
           .collection('schedules')
           .doc(newId)
-          .set(schedule.toJson());
+          .set(newSchedule.toJson());
     } catch (e) {
       throw Exception(" failed to save schedule : $e");
     }

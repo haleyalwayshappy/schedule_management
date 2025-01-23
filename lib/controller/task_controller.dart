@@ -37,8 +37,11 @@ class TaskController extends GetxController {
   }
 
   /* Schedule 이동 로직 */
-  Future<void> moveTask(Schedule schedule, TaskStatus from, TaskStatus to,
-      {int? oldIndex, int? newIndex}) async {
+  Future<void> moveTask({
+    required Schedule schedule,
+    required TaskStatus from,
+    required TaskStatus to,
+  }) async {
     final fromList = taskMap[from]!;
     final toList = taskMap[to]!;
 
@@ -48,17 +51,10 @@ class TaskController extends GetxController {
     // 상태 업데이트 (수평 이동일 경우)
     if (from != to) {
       schedule.status = to;
+      schedule.index = toList.length;
     }
 
-    // 새로운 리스트에 삽입
-    if (newIndex != null && newIndex >= 0 && newIndex < toList.length) {
-      // 지정된 위치에 삽입
-      toList.insert(newIndex, schedule);
-    } else {
-      // 최하단에 위치 (추가)
-      schedule.index = toList.length;
-      toList.add(schedule);
-    }
+    toList.add(schedule);
 
     // 리스트 정렬
     toList.sort((a, b) => a.index.compareTo(b.index));
@@ -66,9 +62,9 @@ class TaskController extends GetxController {
     // 위치 저장 Firebase 업데이트
     try {
       await scheduleController.updateTaskStatus(
-        schedule.id,
-        schedule.index,
-        schedule.status,
+        id: schedule.id,
+        index: schedule.index,
+        status: schedule.status,
       );
       print("Firebase: Status and Index updated for ${schedule.title}");
     } catch (e) {
@@ -82,7 +78,9 @@ class TaskController extends GetxController {
   }
 
   void updateTaskOrderWithinSection(
-      TaskStatus status, int oldIndex, int newIndex) {
+      {required TaskStatus status,
+      required int oldIndex,
+      required int newIndex}) {
     final taskList = taskMap[status]!;
     if (newIndex != oldIndex) {
       // 엄격한 조건 완화

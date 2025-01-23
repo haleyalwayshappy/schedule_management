@@ -200,11 +200,11 @@ class AddScheduleDialog {
                   label: "추가",
                   onPressed: () {
                     controller.addSchedule(
-                      titleController.text,
-                      contentController.text,
-                      assigneeController.text,
-                      controller.selectedDate.value,
-                      selectedStatus.value,
+                      title: titleController.text,
+                      content: contentController.text,
+                      assignee: assigneeController.text,
+                      date: controller.selectedDate.value,
+                      task: selectedStatus.value,
                     );
 
                     Get.back();

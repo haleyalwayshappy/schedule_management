@@ -12,4 +12,12 @@ enum TaskStatus {
 
   const TaskStatus(this.label, this.color);
   bool isComplete() => this == TaskStatus.done;
+
+  // fromName static method
+  static TaskStatus fromName(String name) {
+    return TaskStatus.values.firstWhere(
+      (status) => status.name == name,
+      orElse: () => TaskStatus.todo, // 기본값 설정
+    );
+  }
 }

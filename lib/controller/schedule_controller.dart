@@ -7,11 +7,11 @@ import '../model/schedule.dart';
 class ScheduleController extends GetxController {
   final FirebaseService fsService;
 
-  // 파이어베이스에서 가져온 스케쥴 리스트
-  var schedules = <Schedule>[].obs;
+  var schedules = <Schedule>[].obs; // 파이어베이스에서 가져온 스케쥴 리스트
+  Rx<DateTime> selectedDate = DateTime.now().obs; // 선택된 날짜
 
-  // 선택된 날짜
-  Rx<DateTime> selectedDate = DateTime.now().obs;
+  RxBool isLoading = false.obs;
+  RxString errorMessage = ''.obs;
 
   ScheduleController(this.fsService);
 
@@ -23,41 +23,47 @@ class ScheduleController extends GetxController {
 
   /* 스케쥴 전체 불러오기 */
   Future<void> loadAllSchedules() async {
+    isLoading.value = true;
+    errorMessage.value = '';
     try {
       schedules.value = await fsService.loadAllSchedules();
+
       print("Schedules loaded: ${schedules.length}");
     } catch (e) {
       throw Exception("Failed to load all schedules: $e");
+    } finally {
+      isLoading.value = false;
     }
   }
 
   /* 스케쥴 추가 */
-  Future<void> addSchedule(String title, String content, String assignee,
-      DateTime date, TaskStatus task) async {
+  Future<void> addSchedule({
+    required String title,
+    required String content,
+    required String assignee,
+    required DateTime date,
+    required TaskStatus task,
+  }) async {
     try {
-      int newIndex = schedules.length + 1;
-      String newId = 'schedule_${date.day}_${newIndex.toString()}';
-
-      Schedule newSchedule = Schedule(
-        index: newIndex,
-        id: newId,
+      await fsService.addSchedule(
         title: title,
         content: content,
         assignee: assignee,
         date: date,
-        status: task,
+        task: task,
+        existingSchedulesCount: schedules.length,
       );
 
-      await fsService.addSchedule(newId, newSchedule);
-      schedules.add(newSchedule);
+      // 성공 시 스케줄 목록 새로고침
+      await loadAllSchedules();
     } catch (e) {
       throw Exception("Failed to save schedule: $e");
     }
   }
 
-  /* 스케쥴 수정
-  * ; bool 형을 주어 성공, 실패시 noti 진행 (괜찮으면 추후에 add , Delete 에도 하자) */
-  Future<bool> updateSchedule(Schedule schedule) async {
+  /* 스케쥴 수정 */
+
+  Future<void> updateSchedule(Schedule schedule) async {
     try {
       await fsService.updateSchedule(schedule);
 
@@ -67,14 +73,16 @@ class ScheduleController extends GetxController {
         schedules[index] = schedule; // 수정된 값 반영
         schedules.refresh(); // ui에 새로고침
       }
-      return true;
     } catch (e) {
       throw Exception("Failed to update schedule: $e");
     }
   }
 
   /* TODO index, status 단일 수정 ( 위치이동 시 필요 ) */
-  Future<void> updateTaskStatus(String id, int index, TaskStatus status) async {
+  Future<void> updateTaskStatus(
+      {required String id,
+      required int index,
+      required TaskStatus status}) async {
     try {
       await fsService.updateTaskStatus(id, index, status);
     } catch (e) {
