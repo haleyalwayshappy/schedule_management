@@ -41,4 +41,7 @@ HIT_채용미션
 
 
 8. 폴더 구조 
+<img width="706" alt="스크린샷 2025-01-23 오후 10 53 38" src="https://github.com/user-attachments/assets/60040972-99fa-4954-83cd-ecd5ee2cb3f7" />
 
+9. 파이어 베이스 호스팅 사용하여 배포
+   https://schedulemanagement-6f601.web.app
