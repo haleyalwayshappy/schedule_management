@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/color_palette.dart';
+import 'package:schedule_management/theme/color_palette.dart';
 
 // 커스텀버튼 (통일감 있는 버튼 스타일)
 class CustomButton extends StatelessWidget {

@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:schedule_management/controller/schedule_controller.dart';
+import 'package:schedule_management/model/schedule.dart';
 import 'package:schedule_management/model/task_status.dart';
+import 'package:schedule_management/theme/app_text_styles.dart';
+import 'package:schedule_management/theme/color_palette.dart';
 import 'package:schedule_management/theme/typo.dart';
-import 'package:schedule_management/widgets/custom_button.dart';
-import 'package:schedule_management/widgets/status_chip_widget.dart';
 import 'package:toastification/toastification.dart';
 
-import '../controller/schedule_controller.dart';
-import '../theme/app_text_styles.dart';
-import '../theme/color_palette.dart';
 
-/// 다이얼로그로 스케줄 추가 화면을 구현
-class AddScheduleDialog {
-  static void show(BuildContext context) {
-    final ScheduleController controller = Get.find();
-    final TextEditingController assigneeController = TextEditingController();
-    final TextEditingController titleController = TextEditingController();
-    final TextEditingController contentController = TextEditingController();
-    final Rx<TaskStatus> selectedStatus = TaskStatus.todo.obs;
+import 'custom_button.dart';
+import 'status_chip_widget.dart';
 
-    DateTime initialDay = DateTime.now();
+class UpdateScheduleDialog {
+  static void show(Schedule scheduleDetail) {
+    final ScheduleController _controller = Get.find();
+    final TextEditingController assigneeController =
+        TextEditingController(text: scheduleDetail.assignee);
+    final TextEditingController titleController =
+        TextEditingController(text: scheduleDetail.title);
+    final TextEditingController contentController =
+        TextEditingController(text: scheduleDetail.content);
+    final Rx<TaskStatus> selectedStatus = Rx<TaskStatus>(scheduleDetail.status);
+
+    Rx<DateTime> selectedDate = Rx<DateTime>(scheduleDetail.date);
 
     showDialog(
-      context: context,
-      barrierDismissible: false, // 다이얼로그 외부 클릭 시 닫히지 않음
+      context: Get.context!,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Palette.boardBackgroundColor, // 배경색 설정
@@ -42,6 +46,16 @@ class AddScheduleDialog {
                   SizedBox(
                     height: 10,
                   ),
+                  Text(
+                    "수정",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Pretendard',
+                      fontWeight: Pretendard().bold,
+                      color: Palette.primaryColor,
+                    ),
+                  ),
+                  SizedBox(height: 10),
                   Row(
                     children: [
                       Text("작성자", style: AppTextStyles.noticeTextStyle),
@@ -60,7 +74,7 @@ class AddScheduleDialog {
                             letterSpacing: -0.4,
                           ),
                           decoration: InputDecoration(
-                            hintText: "작성자를 입력해 주세요.",
+                            hintText: "작성자를 입력해주세요.",
                             hintStyle: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: Pretendard().semiBold,
@@ -78,14 +92,11 @@ class AddScheduleDialog {
                   Row(
                     children: [
                       Text("날짜", style: AppTextStyles.noticeTextStyle),
-                      SizedBox(
-                        width: 10,
-                      ),
                       TextButton(
                         onPressed: () async {
                           final DateTime? dateTime = await showDatePicker(
                               context: context,
-                              initialDate: initialDay,
+                              initialDate: selectedDate.value,
                               firstDate: DateTime(2000),
                               lastDate: DateTime(3000),
                               builder: (BuildContext context, Widget? child) {
@@ -109,12 +120,12 @@ class AddScheduleDialog {
                                 );
                               });
                           if (dateTime != null) {
-                            controller.updateDate(dateTime);
+                            selectedDate.value = dateTime;
                           }
                         },
                         child: Obx(
                           () => Text(
-                            '${controller.selectedDate.value.year} / ${controller.selectedDate.value.month} / ${controller.selectedDate.value.day}',
+                            '${selectedDate.value.year}-${selectedDate.value.month}-${selectedDate.value.day}',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: Pretendard().semiBold,
@@ -156,7 +167,7 @@ class AddScheduleDialog {
                       border: InputBorder.none,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   Text("내용", style: AppTextStyles.noticeTextStyle),
                   TextField(
                     controller: contentController,
@@ -193,27 +204,45 @@ class AddScheduleDialog {
                 CustomButton(
                   label: "취소",
                   onPressed: () {
-                    Get.back();
+                    Get.back(); // 다이얼로그 닫기
                   },
                 ),
                 CustomButton(
-                  label: "추가",
-                  onPressed: () {
-                    controller.addSchedule(
-                      title: titleController.text,
-                      content: contentController.text,
-                      assignee: assigneeController.text,
-                      date: controller.selectedDate.value,
-                      task: selectedStatus.value,
+                  label: "수정",
+                  onPressed: () async {
+                    // 수정 버튼 클릭 시 데이터 수정
+                    Schedule editSchedule = Schedule(
+                      id: scheduleDetail.id,
+                      index: scheduleDetail.index,
+                      title: titleController.text.isNotEmpty
+                          ? titleController.text
+                          : scheduleDetail.title,
+                      content: contentController.text.isNotEmpty
+                          ? contentController.text
+                          : scheduleDetail.content,
+                      assignee: assigneeController.text.isNotEmpty
+                          ? assigneeController.text
+                          : scheduleDetail.assignee,
+                      date: _controller.selectedDate.value,
+                      status: selectedStatus.value,
                     );
 
-                    Get.back();
-                    toastification.show(
-                      context: context,
-                      icon: const Icon(Icons.notification_add_rounded),
-                      title: Text("일정이 추가 되었습니다."),
-                      autoCloseDuration: const Duration(seconds: 3),
-                    );
+                    try {
+                      await _controller.updateSchedule(editSchedule);
+                      Get.back();
+                      toastification.show(
+                        icon: const Icon(Icons.check),
+                        title: Text("일정이 수정되었습니다."),
+                        autoCloseDuration: const Duration(seconds: 3),
+                      );
+                    } catch (e) {
+                      toastification.show(
+                        context: context,
+                        icon: const Icon(Icons.dangerous_outlined),
+                        title: Text("일정 수정 중 오류가 생겼습니다."),
+                        autoCloseDuration: const Duration(seconds: 3),
+                      );
+                    }
                   },
                 ),
               ],

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/schedule_controller.dart';
-import '../model/task_status.dart';
-import '../theme/color_palette.dart';
+import 'package:schedule_management/controller/schedule_controller.dart';
+import 'package:schedule_management/model/task_status.dart';
+import 'package:schedule_management/theme/color_palette.dart';
 
 class StatusChipWidget extends StatelessWidget {
   final Rx<TaskStatus> selectedStatus; // 현재 선택된 상태

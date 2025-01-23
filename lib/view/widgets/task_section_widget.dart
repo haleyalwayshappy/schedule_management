@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:schedule_management/widgets/detail_schedule_dialog.dart';
-import '../controller/task_controller.dart';
-import '../controller/schedule_controller.dart';
-import '../model/schedule.dart';
-import '../model/task_status.dart';
+import 'package:schedule_management/controller/task_controller.dart';
+import 'package:schedule_management/model/schedule.dart';
+import 'package:schedule_management/model/task_status.dart';
+import 'package:schedule_management/view/widgets/detail_schedule_dialog.dart';
+
 import '../widgets/schedule_widget.dart';
 
 class TaskSectionWidget extends StatelessWidget {

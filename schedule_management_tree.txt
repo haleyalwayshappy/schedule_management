@@ -1,0 +1,926 @@
+.
+├── README.md
+├── analysis_options.yaml
+├── android
+│ ├── app
+│ │ ├── build.gradle
+│ │ └── src
+│ │     ├── debug
+│ │     │ └── AndroidManifest.xml
+│ │     ├── main
+│ │     │ ├── AndroidManifest.xml
+│ │     │ ├── java
+│ │     │ │ └── io
+│ │     │ │     └── flutter
+│ │     │ │         └── plugins
+│ │     │ │             └── GeneratedPluginRegistrant.java
+│ │     │ ├── kotlin
+│ │     │ │ └── com
+│ │     │ │     └── example
+│ │     │ │         └── schedule_management
+│ │     │ │             └── MainActivity.kt
+│ │     │ └── res
+│ │     │     ├── drawable
+│ │     │     │ └── launch_background.xml
+│ │     │     ├── drawable-v21
+│ │     │     │ └── launch_background.xml
+│ │     │     ├── mipmap-hdpi
+│ │     │     │ └── ic_launcher.png
+│ │     │     ├── mipmap-mdpi
+│ │     │     │ └── ic_launcher.png
+│ │     │     ├── mipmap-xhdpi
+│ │     │     │ └── ic_launcher.png
+│ │     │     ├── mipmap-xxhdpi
+│ │     │     │ └── ic_launcher.png
+│ │     │     ├── mipmap-xxxhdpi
+│ │     │     │ └── ic_launcher.png
+│ │     │     ├── values
+│ │     │     │ └── styles.xml
+│ │     │     └── values-night
+│ │     │         └── styles.xml
+│ │     └── profile
+│ │         └── AndroidManifest.xml
+│ ├── build.gradle
+│ ├── gradle
+│ │ └── wrapper
+│ │     ├── gradle-wrapper.jar
+│ │     └── gradle-wrapper.properties
+│ ├── gradle.properties
+│ ├── gradlew
+│ ├── gradlew.bat
+│ ├── local.properties
+│ ├── schedule_management_android.iml
+│ └── settings.gradle
+├── assets
+│ └── fonts
+│     ├── Pretendard-Black.ttf
+│     ├── Pretendard-Bold.ttf
+│     ├── Pretendard-ExtraBold.ttf
+│     ├── Pretendard-ExtraLight.ttf
+│     ├── Pretendard-Light.ttf
+│     ├── Pretendard-Medium.ttf
+│     ├── Pretendard-Regular.ttf
+│     ├── Pretendard-SemiBold.ttf
+│     └── Pretendard-Thin.ttf
+├── build
+│ ├── 8fa674f0977dae7277331c0072e44450
+│ │ ├── _composite.stamp
+│ │ ├── gen_dart_plugin_registrant.stamp
+│ │ └── gen_localizations.stamp
+│ ├── f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill
+│ ├── flutter_assets
+│ │ ├── AssetManifest.bin
+│ │ ├── AssetManifest.bin.json
+│ │ ├── AssetManifest.json
+│ │ ├── FontManifest.json
+│ │ ├── NOTICES
+│ │ ├── assets
+│ │ │ └── fonts
+│ │ │     ├── Pretendard-Black.ttf
+│ │ │     ├── Pretendard-Bold.ttf
+│ │ │     ├── Pretendard-ExtraBold.ttf
+│ │ │     ├── Pretendard-ExtraLight.ttf
+│ │ │     ├── Pretendard-Light.ttf
+│ │ │     ├── Pretendard-Medium.ttf
+│ │ │     ├── Pretendard-Regular.ttf
+│ │ │     ├── Pretendard-SemiBold.ttf
+│ │ │     └── Pretendard-Thin.ttf
+│ │ ├── fonts
+│ │ │ └── MaterialIcons-Regular.otf
+│ │ ├── packages
+│ │ │ ├── cupertino_icons
+│ │ │ │ └── assets
+│ │ │ │     └── CupertinoIcons.ttf
+│ │ │ └── iconsax_flutter
+│ │ │     └── fonts
+│ │ │         └── FlutterIconsax.ttf
+│ │ └── shaders
+│ │     └── ink_sparkle.frag
+│ ├── last_build_run.json
+│ └── web
+│     ├── assets
+│     │ ├── AssetManifest.bin
+│     │ ├── AssetManifest.bin.json
+│     │ ├── AssetManifest.json
+│     │ ├── FontManifest.json
+│     │ ├── NOTICES
+│     │ ├── assets
+│     │ │ └── fonts
+│     │ │     ├── Pretendard-Black.ttf
+│     │ │     ├── Pretendard-Bold.ttf
+│     │ │     ├── Pretendard-ExtraBold.ttf
+│     │ │     ├── Pretendard-ExtraLight.ttf
+│     │ │     ├── Pretendard-Light.ttf
+│     │ │     ├── Pretendard-Medium.ttf
+│     │ │     ├── Pretendard-Regular.ttf
+│     │ │     ├── Pretendard-SemiBold.ttf
+│     │ │     └── Pretendard-Thin.ttf
+│     │ ├── fonts
+│     │ │ └── MaterialIcons-Regular.otf
+│     │ ├── packages
+│     │ │ ├── cupertino_icons
+│     │ │ │ └── assets
+│     │ │ │     └── CupertinoIcons.ttf
+│     │ │ └── iconsax_flutter
+│     │ │     └── fonts
+│     │ │         └── FlutterIconsax.ttf
+│     │ └── shaders
+│     │     └── ink_sparkle.frag
+│     ├── canvaskit
+│     │ ├── canvaskit.js
+│     │ ├── canvaskit.js.symbols
+│     │ ├── canvaskit.wasm
+│     │ ├── chromium
+│     │ │ ├── canvaskit.js
+│     │ │ ├── canvaskit.js.symbols
+│     │ │ └── canvaskit.wasm
+│     │ ├── skwasm.js
+│     │ ├── skwasm.js.symbols
+│     │ ├── skwasm.wasm
+│     │ └── skwasm.worker.js
+│     ├── favicon.png
+│     ├── flutter.js
+│     ├── flutter_bootstrap.js
+│     ├── flutter_service_worker.js
+│     ├── icons
+│     │ ├── Icon-192.png
+│     │ ├── Icon-512.png
+│     │ ├── Icon-maskable-192.png
+│     │ └── Icon-maskable-512.png
+│     ├── index.html
+│     ├── main.dart.js
+│     ├── manifest.json
+│     └── version.json
+├── firebase.json
+├── firestore.indexes.json
+├── firestore.rules
+├── ios
+│ ├── Flutter
+│ │ ├── AppFrameworkInfo.plist
+│ │ ├── Debug.xcconfig
+│ │ ├── Generated.xcconfig
+│ │ ├── Release.xcconfig
+│ │ └── flutter_export_environment.sh
+│ ├── Podfile
+│ ├── Runner
+│ │ ├── AppDelegate.swift
+│ │ ├── Assets.xcassets
+│ │ │ ├── AppIcon.appiconset
+│ │ │ │ ├── Contents.json
+│ │ │ │ ├── Icon-App-1024x1024@1x.png
+│ │ │ │ ├── Icon-App-20x20@1x.png
+│ │ │ │ ├── Icon-App-20x20@2x.png
+│ │ │ │ ├── Icon-App-20x20@3x.png
+│ │ │ │ ├── Icon-App-29x29@1x.png
+│ │ │ │ ├── Icon-App-29x29@2x.png
+│ │ │ │ ├── Icon-App-29x29@3x.png
+│ │ │ │ ├── Icon-App-40x40@1x.png
+│ │ │ │ ├── Icon-App-40x40@2x.png
+│ │ │ │ ├── Icon-App-40x40@3x.png
+│ │ │ │ ├── Icon-App-60x60@2x.png
+│ │ │ │ ├── Icon-App-60x60@3x.png
+│ │ │ │ ├── Icon-App-76x76@1x.png
+│ │ │ │ ├── Icon-App-76x76@2x.png
+│ │ │ │ └── Icon-App-83.5x83.5@2x.png
+│ │ │ └── LaunchImage.imageset
+│ │ │     ├── Contents.json
+│ │ │     ├── LaunchImage.png
+│ │ │     ├── LaunchImage@2x.png
+│ │ │     ├── LaunchImage@3x.png
+│ │ │     └── README.md
+│ │ ├── Base.lproj
+│ │ │ ├── LaunchScreen.storyboard
+│ │ │ └── Main.storyboard
+│ │ ├── GeneratedPluginRegistrant.h
+│ │ ├── GeneratedPluginRegistrant.m
+│ │ ├── Info.plist
+│ │ └── Runner-Bridging-Header.h
+│ ├── Runner.xcodeproj
+│ │ ├── project.pbxproj
+│ │ ├── project.xcworkspace
+│ │ │ ├── contents.xcworkspacedata
+│ │ │ └── xcshareddata
+│ │ │     ├── IDEWorkspaceChecks.plist
+│ │ │     ├── WorkspaceSettings.xcsettings
+│ │ │     └── swiftpm
+│ │ │         └── configuration
+│ │ └── xcshareddata
+│ │     └── xcschemes
+│ │         └── Runner.xcscheme
+│ ├── Runner.xcworkspace
+│ │ ├── contents.xcworkspacedata
+│ │ └── xcshareddata
+│ │     ├── IDEWorkspaceChecks.plist
+│ │     ├── WorkspaceSettings.xcsettings
+│ │     └── swiftpm
+│ │         └── configuration
+│ └── RunnerTests
+│     └── RunnerTests.swift
+├── lib
+│ ├── controller
+│ │ ├── schedule_controller.dart
+│ │ └── task_controller.dart
+│ ├── firebase_options.dart
+│ ├── main.dart
+│ ├── model
+│ │ ├── schedule.dart
+│ │ └── task_status.dart
+│ ├── service
+│ │ └── firebase_service.dart
+│ ├── theme
+│ │ ├── app_text_styles.dart
+│ │ ├── color_palette.dart
+│ │ └── typo.dart
+│ └── view
+│     ├── board_screen.dart
+│     └── widgets
+│         ├── add_schedule_dialog.dart
+│         ├── custom_button.dart
+│         ├── detail_schedule_dialog.dart
+│         ├── schedule_widget.dart
+│         ├── status_chip_widget.dart
+│         ├── task_section_widget.dart
+│         └── update_schedule_dialog.dart
+├── node_modules
+│ ├── accepts
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── array-flatten
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── array-flatten.js
+│ │ └── package.json
+│ ├── body-parser
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── SECURITY.md
+│ │ ├── index.js
+│ │ ├── lib
+│ │ │ ├── read.js
+│ │ │ └── types
+│ │ │     ├── json.js
+│ │ │     ├── raw.js
+│ │ │     ├── text.js
+│ │ │     └── urlencoded.js
+│ │ └── package.json
+│ ├── bytes
+│ │ ├── History.md
+│ │ ├── LICENSE
+│ │ ├── Readme.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── call-bind-apply-helpers
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── actualApply.d.ts
+│ │ ├── actualApply.js
+│ │ ├── applyBind.d.ts
+│ │ ├── applyBind.js
+│ │ ├── functionApply.d.ts
+│ │ ├── functionApply.js
+│ │ ├── functionCall.d.ts
+│ │ ├── functionCall.js
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── reflectApply.d.ts
+│ │ ├── reflectApply.js
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── call-bound
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── content-disposition
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── content-type
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── cookie
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── SECURITY.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── cookie-signature
+│ │ ├── History.md
+│ │ ├── Readme.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── debug
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── Makefile
+│ │ ├── README.md
+│ │ ├── component.json
+│ │ ├── karma.conf.js
+│ │ ├── node.js
+│ │ ├── package.json
+│ │ └── src
+│ │     ├── browser.js
+│ │     ├── debug.js
+│ │     ├── index.js
+│ │     ├── inspector-log.js
+│ │     └── node.js
+│ ├── depd
+│ │ ├── History.md
+│ │ ├── LICENSE
+│ │ ├── Readme.md
+│ │ ├── index.js
+│ │ ├── lib
+│ │ │ └── browser
+│ │ │     └── index.js
+│ │ └── package.json
+│ ├── destroy
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── dunder-proto
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── get.d.ts
+│ │ ├── get.js
+│ │ ├── package.json
+│ │ ├── set.d.ts
+│ │ ├── set.js
+│ │ ├── test
+│ │ │ ├── get.js
+│ │ │ ├── index.js
+│ │ │ └── set.js
+│ │ └── tsconfig.json
+│ ├── ee-first
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── encodeurl
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── es-define-property
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── es-errors
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── eval.d.ts
+│ │ ├── eval.js
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── range.d.ts
+│ │ ├── range.js
+│ │ ├── ref.d.ts
+│ │ ├── ref.js
+│ │ ├── syntax.d.ts
+│ │ ├── syntax.js
+│ │ ├── test
+│ │ │ └── index.js
+│ │ ├── tsconfig.json
+│ │ ├── type.d.ts
+│ │ ├── type.js
+│ │ ├── uri.d.ts
+│ │ └── uri.js
+│ ├── es-object-atoms
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── RequireObjectCoercible.d.ts
+│ │ ├── RequireObjectCoercible.js
+│ │ ├── ToObject.d.ts
+│ │ ├── ToObject.js
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── isObject.d.ts
+│ │ ├── isObject.js
+│ │ ├── package.json
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── escape-html
+│ │ ├── LICENSE
+│ │ ├── Readme.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── etag
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── express
+│ │ ├── History.md
+│ │ ├── LICENSE
+│ │ ├── Readme.md
+│ │ ├── index.js
+│ │ ├── lib
+│ │ │ ├── application.js
+│ │ │ ├── express.js
+│ │ │ ├── middleware
+│ │ │ │ ├── init.js
+│ │ │ │ └── query.js
+│ │ │ ├── request.js
+│ │ │ ├── response.js
+│ │ │ ├── router
+│ │ │ │ ├── index.js
+│ │ │ │ ├── layer.js
+│ │ │ │ └── route.js
+│ │ │ ├── utils.js
+│ │ │ └── view.js
+│ │ └── package.json
+│ ├── finalhandler
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── SECURITY.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── forwarded
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── fresh
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── function-bind
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── implementation.js
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ └── test
+│ │     └── index.js
+│ ├── get-intrinsic
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ └── test
+│ │     └── GetIntrinsic.js
+│ ├── get-proto
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── Object.getPrototypeOf.d.ts
+│ │ ├── Object.getPrototypeOf.js
+│ │ ├── README.md
+│ │ ├── Reflect.getPrototypeOf.d.ts
+│ │ ├── Reflect.getPrototypeOf.js
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── gopd
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── gOPD.d.ts
+│ │ ├── gOPD.js
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── has-symbols
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── shams.d.ts
+│ │ ├── shams.js
+│ │ ├── test
+│ │ │ ├── index.js
+│ │ │ ├── shams
+│ │ │ │ ├── core-js.js
+│ │ │ │ └── get-own-property-symbols.js
+│ │ │ └── tests.js
+│ │ └── tsconfig.json
+│ ├── hasown
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ └── tsconfig.json
+│ ├── http-errors
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── iconv-lite
+│ │ ├── Changelog.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── encodings
+│ │ │ ├── dbcs-codec.js
+│ │ │ ├── dbcs-data.js
+│ │ │ ├── index.js
+│ │ │ ├── internal.js
+│ │ │ ├── sbcs-codec.js
+│ │ │ ├── sbcs-data-generated.js
+│ │ │ ├── sbcs-data.js
+│ │ │ ├── tables
+│ │ │ │ ├── big5-added.json
+│ │ │ │ ├── cp936.json
+│ │ │ │ ├── cp949.json
+│ │ │ │ ├── cp950.json
+│ │ │ │ ├── eucjp.json
+│ │ │ │ ├── gb18030-ranges.json
+│ │ │ │ ├── gbk-added.json
+│ │ │ │ └── shiftjis.json
+│ │ │ ├── utf16.js
+│ │ │ └── utf7.js
+│ │ ├── lib
+│ │ │ ├── bom-handling.js
+│ │ │ ├── extend-node.js
+│ │ │ ├── index.d.ts
+│ │ │ ├── index.js
+│ │ │ └── streams.js
+│ │ └── package.json
+│ ├── inherits
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── inherits.js
+│ │ ├── inherits_browser.js
+│ │ └── package.json
+│ ├── ipaddr.js
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── ipaddr.min.js
+│ │ ├── lib
+│ │ │ ├── ipaddr.js
+│ │ │ └── ipaddr.js.d.ts
+│ │ └── package.json
+│ ├── math-intrinsics
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── abs.d.ts
+│ │ ├── abs.js
+│ │ ├── constants
+│ │ │ ├── maxArrayLength.d.ts
+│ │ │ ├── maxArrayLength.js
+│ │ │ ├── maxSafeInteger.d.ts
+│ │ │ ├── maxSafeInteger.js
+│ │ │ ├── maxValue.d.ts
+│ │ │ └── maxValue.js
+│ │ ├── floor.d.ts
+│ │ ├── floor.js
+│ │ ├── isFinite.d.ts
+│ │ ├── isFinite.js
+│ │ ├── isInteger.d.ts
+│ │ ├── isInteger.js
+│ │ ├── isNaN.d.ts
+│ │ ├── isNaN.js
+│ │ ├── isNegativeZero.d.ts
+│ │ ├── isNegativeZero.js
+│ │ ├── max.d.ts
+│ │ ├── max.js
+│ │ ├── min.d.ts
+│ │ ├── min.js
+│ │ ├── mod.d.ts
+│ │ ├── mod.js
+│ │ ├── package.json
+│ │ ├── pow.d.ts
+│ │ ├── pow.js
+│ │ ├── round.d.ts
+│ │ ├── round.js
+│ │ ├── sign.d.ts
+│ │ ├── sign.js
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── media-typer
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── merge-descriptors
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── methods
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── mime
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── cli.js
+│ │ ├── mime.js
+│ │ ├── package.json
+│ │ ├── src
+│ │ │ ├── build.js
+│ │ │ └── test.js
+│ │ └── types.json
+│ ├── mime-db
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── db.json
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── mime-types
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── ms
+│ │ ├── index.js
+│ │ ├── license.md
+│ │ ├── package.json
+│ │ └── readme.md
+│ ├── negotiator
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ ├── lib
+│ │ │ ├── charset.js
+│ │ │ ├── encoding.js
+│ │ │ ├── language.js
+│ │ │ └── mediaType.js
+│ │ └── package.json
+│ ├── object-inspect
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── example
+│ │ │ ├── all.js
+│ │ │ ├── circular.js
+│ │ │ ├── fn.js
+│ │ │ └── inspect.js
+│ │ ├── index.js
+│ │ ├── package-support.json
+│ │ ├── package.json
+│ │ ├── readme.markdown
+│ │ ├── test
+│ │ │ ├── bigint.js
+│ │ │ ├── browser
+│ │ │ │ └── dom.js
+│ │ │ ├── circular.js
+│ │ │ ├── deep.js
+│ │ │ ├── element.js
+│ │ │ ├── err.js
+│ │ │ ├── fakes.js
+│ │ │ ├── fn.js
+│ │ │ ├── global.js
+│ │ │ ├── has.js
+│ │ │ ├── holes.js
+│ │ │ ├── indent-option.js
+│ │ │ ├── inspect.js
+│ │ │ ├── lowbyte.js
+│ │ │ ├── number.js
+│ │ │ ├── quoteStyle.js
+│ │ │ ├── toStringTag.js
+│ │ │ ├── undef.js
+│ │ │ └── values.js
+│ │ ├── test-core-js.js
+│ │ └── util.inspect.js
+│ ├── on-finished
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── parseurl
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── path-to-regexp
+│ │ ├── LICENSE
+│ │ ├── Readme.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── proxy-addr
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── qs
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE.md
+│ │ ├── README.md
+│ │ ├── dist
+│ │ │ └── qs.js
+│ │ ├── lib
+│ │ │ ├── formats.js
+│ │ │ ├── index.js
+│ │ │ ├── parse.js
+│ │ │ ├── stringify.js
+│ │ │ └── utils.js
+│ │ ├── package.json
+│ │ └── test
+│ │     ├── empty-keys-cases.js
+│ │     ├── parse.js
+│ │     ├── stringify.js
+│ │     └── utils.js
+│ ├── range-parser
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── raw-body
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── SECURITY.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── safe-buffer
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── safer-buffer
+│ │ ├── LICENSE
+│ │ ├── Porting-Buffer.md
+│ │ ├── Readme.md
+│ │ ├── dangerous.js
+│ │ ├── package.json
+│ │ ├── safer.js
+│ │ └── tests.js
+│ ├── send
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── SECURITY.md
+│ │ ├── index.js
+│ │ ├── node_modules
+│ │ │ ├── encodeurl
+│ │ │ │ ├── HISTORY.md
+│ │ │ │ ├── LICENSE
+│ │ │ │ ├── README.md
+│ │ │ │ ├── index.js
+│ │ │ │ └── package.json
+│ │ │ └── ms
+│ │ │     ├── index.js
+│ │ │     ├── license.md
+│ │ │     ├── package.json
+│ │ │     └── readme.md
+│ │ └── package.json
+│ ├── serve-static
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── setprototypeof
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ └── test
+│ │     └── index.js
+│ ├── side-channel
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── side-channel-list
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── list.d.ts
+│ │ ├── package.json
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── side-channel-map
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── side-channel-weakmap
+│ │ ├── CHANGELOG.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.d.ts
+│ │ ├── index.js
+│ │ ├── package.json
+│ │ ├── test
+│ │ │ └── index.js
+│ │ └── tsconfig.json
+│ ├── statuses
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── codes.json
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── toidentifier
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── type-is
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── unpipe
+│ │ ├── HISTORY.md
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ ├── utils-merge
+│ │ ├── LICENSE
+│ │ ├── README.md
+│ │ ├── index.js
+│ │ └── package.json
+│ └── vary
+│     ├── HISTORY.md
+│     ├── LICENSE
+│     ├── README.md
+│     ├── index.js
+│     └── package.json
+├── package-lock.json
+├── package.json
+├── pubspec.lock
+├── pubspec.yaml
+├── schedule_management.iml
+├── schedule_management_tree.txt
+├── test
+│ └── widget_test.dart
+└── web
+    ├── favicon.png
+    ├── icons
+    │ ├── Icon-192.png
+    │ ├── Icon-512.png
+    │ ├── Icon-maskable-192.png
+    │ └── Icon-maskable-512.png
+    ├── index.html
+    └── manifest.json
+
+194 directories, 730 files

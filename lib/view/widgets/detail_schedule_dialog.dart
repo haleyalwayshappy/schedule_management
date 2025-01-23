@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:schedule_management/controller/schedule_controller.dart';
+import 'package:schedule_management/theme/app_text_styles.dart';
+import 'package:schedule_management/theme/color_palette.dart';
+import 'package:schedule_management/theme/typo.dart';
 import 'package:toastification/toastification.dart';
 
-import '../controller/schedule_controller.dart';
-import '../model/task_status.dart';
-import '../theme/app_text_styles.dart';
-import '../theme/color_palette.dart';
-import '../theme/typo.dart';
 import 'custom_button.dart';
-import 'status_chip_widget.dart';
 import 'update_schedule_dialog.dart';
 
 /* 상세 페이지 */

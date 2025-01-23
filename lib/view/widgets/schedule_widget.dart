@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../theme/color_palette.dart';
-import '../theme/typo.dart';
+import 'package:schedule_management/theme/color_palette.dart';
+import 'package:schedule_management/theme/typo.dart';
 
 ///  일정 위젯
 /// 1.제목 title
