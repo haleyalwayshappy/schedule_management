@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/haleyalwayshappy/schedule_management/issues"
   },
-  "homepage": "https://github.com/haleyalwayshappy/schedule_management#readme"
+  "homepage": "https://github.com/haleyalwayshappy/schedule_management#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }
