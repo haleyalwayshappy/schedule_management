@@ -35,3 +35,4 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SCHEDULEMANAGEMENT_6F601 }}
           projectId: schedulemanagement-6f601
+          channelId : live
