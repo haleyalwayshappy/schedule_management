@@ -14,9 +14,12 @@ import 'status_chip_widget.dart';
 class UpdateScheduleDialog {
   static void show(Schedule scheduleDetail) {
     final ScheduleController _controller = Get.find();
-    final TextEditingController assigneeController = TextEditingController();
-    final TextEditingController titleController = TextEditingController();
-    final TextEditingController contentController = TextEditingController();
+    final TextEditingController assigneeController =
+        TextEditingController(text: scheduleDetail.assignee);
+    final TextEditingController titleController =
+        TextEditingController(text: scheduleDetail.title);
+    final TextEditingController contentController =
+        TextEditingController(text: scheduleDetail.content);
     final Rx<TaskStatus> selectedStatus = Rx<TaskStatus>(scheduleDetail.status);
 
     Rx<DateTime> selectedDate = Rx<DateTime>(scheduleDetail.date);
@@ -70,7 +73,7 @@ class UpdateScheduleDialog {
                             letterSpacing: -0.4,
                           ),
                           decoration: InputDecoration(
-                            hintText: scheduleDetail.assignee,
+                            hintText: "작성자를 입력해주세요.",
                             hintStyle: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: Pretendard().semiBold,
@@ -152,7 +155,7 @@ class UpdateScheduleDialog {
                       letterSpacing: -0.4,
                     ),
                     decoration: InputDecoration(
-                      hintText: scheduleDetail.title,
+                      hintText: "제목을 입력해주세요.",
                       hintStyle: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
@@ -178,7 +181,7 @@ class UpdateScheduleDialog {
                       letterSpacing: -0.4,
                     ),
                     decoration: InputDecoration(
-                      hintText: scheduleDetail.content,
+                      hintText: "내용을 입력해주세요.",
                       hintStyle: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
